@@ -43,47 +43,9 @@ public class Main {
         };
         thread.start();
 
-        Thread thread1 = new Thread() {
-            @Override
-            public void run() {
-                new Calculos().getBetterOnce();System.out.print(1);
-            }
-        };
-        thread1.start();
-
-        Thread thread2 = new Thread() {
-            @Override
-            public void run() {
-                new Calculos().getBetterOnce();System.out.print(2);
-            }
-        };
-        thread2.start();
-
-        Thread thread3 = new Thread() {
-            @Override
-            public void run() {
-                new Calculos().getBetterOnce();System.out.print(3);
-            }
-        };
-        thread3.start();
-
-        Thread thread4 = new Thread() {
-            @Override
-            public void run() {
-                new Calculos().getBetterOnce();System.out.print(4);
-            }
-        };
-        thread4.start();
-
             try {
                 thread.join();
-                thread1.join();
-                thread2.join();
-                thread3.join();
-                thread4.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-        }
+            } catch (InterruptedException e) {e.printStackTrace();}
 
         tEnd = System.currentTimeMillis();
         time = tEnd-tStart;
