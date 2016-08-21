@@ -1,7 +1,5 @@
 package org.dlt.model;
 
-import java.util.List;
-
 public class Vertex {
     private int from,to;
     private double cost;
