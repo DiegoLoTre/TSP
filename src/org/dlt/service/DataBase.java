@@ -17,7 +17,7 @@ import java.util.List;
 
 public class DataBase {
 
-    private String APIKEY = "AIzaSyAOvc6vdULyXtI0j0xrbBcNqO3_aOSSy-Q";
+    /*Put here your API Key of google*/private String APIKEY = "";
 
     @Getter @Setter private List<Vertex> vertex;
     @Getter @Setter private List<City> cities;
@@ -32,7 +32,7 @@ public class DataBase {
         vertex = new ArrayList<>();
 
         getGoogleDistance();
-        vertex.add(new Vertex(0,0,0)); //Add 0->0 cost 0 to avoid crashes
+        vertex.add(new Vertex(0,0,0,0)); //Add 0->0 cost 0 to avoid crashes
     }
 
     private void getGoogleDistance() throws IOException, JSONException {
@@ -60,7 +60,9 @@ public class DataBase {
                 Google.Elements element = google.getList().get(j);
                 //vertex.add(new Vertex(i,j+i+1, element.getDuration().getValue()));
                 if (id == i) id++;
-                vertex.add(new Vertex(i,id++, element.getDistance().getValue()));
+                vertex.add(new Vertex(i,id++,
+                        element.getDistance().getValue(),
+                        element.getDuration().getValue()));
             }
         }
         System.out.println("Se termino de obtener datos de Google");
@@ -99,7 +101,8 @@ public class DataBase {
 
         //System.out.println(vertex1);
 
-        return vertex1.getCost();
+        return vertex1.getTime();
+        //return vertex1.getDistance();
     }
     public String getName(int id) {
         City city = cities.stream()

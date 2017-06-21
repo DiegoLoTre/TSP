@@ -5,12 +5,13 @@ import lombok.Setter;
 
 public class Vertex {
     @Getter @Setter private int from,to;
-    @Getter @Setter private double cost;
+    @Getter @Setter private double distance, time;
 
-    public Vertex(int from, int to,double cost) {
+    public Vertex(int from, int to,double distance, double time) {
         this.from = from;
         this.to = to;
-        this.cost = cost;
+        this.distance = distance;
+        this.time = time;
     }
 
     @Override
@@ -22,6 +23,6 @@ public class Vertex {
 
     @Override
     public String toString() {
-        return "De "+from+" A "+to+":"+cost;
+        return "De "+from+" A "+to+":"+distance+"/"+time;
     }
 }
