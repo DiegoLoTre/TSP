@@ -1,7 +1,7 @@
 package org.dlt;
 
 import org.dlt.model.Path;
-import org.dlt.service.DataBase;
+import org.dlt.service.Database;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -11,11 +11,11 @@ import java.util.List;
 
 class Combinations {
     private List<Integer> list = new ArrayList<>();
-    private DataBase dataBase;
+    private Database dataBase;
     private Path best;
 
     Combinations(String url) throws IOException, JSONException {
-        dataBase = new DataBase(url);
+        dataBase = new Database(url);
         best = new Path(Double.POSITIVE_INFINITY);
 
         for (int i =1;i<dataBase.getCities().size();i++) {

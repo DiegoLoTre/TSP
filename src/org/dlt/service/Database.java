@@ -15,14 +15,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataBase {
+public class Database {
 
     /*Put here your API Key of google*/private String APIKEY = "";
 
-    @Getter @Setter private List<Vertex> vertex;
+    @Getter
+    @Setter
+    private List<Vertex> vertex;
     @Getter @Setter private List<City> cities;
 
-    public DataBase(String filename) throws IOException, JSONException {
+    public Database(String filename) throws IOException, JSONException {
 
         ObjectMapper mapper = new ObjectMapper();
         cities = mapper.readValue(
