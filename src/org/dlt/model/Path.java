@@ -34,12 +34,6 @@ public class Path implements Comparable<Path> {
             stringBuilder.append(r).append("->");
         }
         stringBuilder.append("Costo: ").append(cost);
-
-        /*StringBuilder stringBuilder = new StringBuilder();
-        for (Integer r: route) {
-            stringBuilder.append(r).append(",");
-        }*/
-
         return stringBuilder.toString();
     }
 

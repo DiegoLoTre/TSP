@@ -22,17 +22,4 @@ public class City {
         this.y = y;
         this.id = 0;
     }
-
-    @Override
-    public String toString() {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.
-                    writerWithDefaultPrettyPrinter().
-                    writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
 }

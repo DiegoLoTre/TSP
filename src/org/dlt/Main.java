@@ -2,10 +2,8 @@ package org.dlt;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import org.dlt.model.Path;
-import org.json.JSONException;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 class Main {
 
@@ -30,10 +28,7 @@ class Main {
             System.out.println("Archivo no encontrado");
         } catch (JsonMappingException jme) {
             System.out.println("Los datos no estan guardados correctamente en el archivo");
-        } catch (IOException e) {
-            e.printStackTrace();
-            //System.out.println("");
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

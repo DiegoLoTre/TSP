@@ -7,24 +7,25 @@ import lombok.Setter;
 import org.dlt.model.City;
 import org.dlt.model.Google;
 import org.dlt.model.Vertex;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.dlt.model.google.Element;
+import org.dlt.model.google.Elements;
+import org.dlt.model.google.Response;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
-
     /*Put here your API Key of google*/private String APIKEY = "";
 
-    @Getter
-    @Setter
-    private List<Vertex> vertex;
+    @Getter @Setter private List<Vertex> vertex;
     @Getter @Setter private List<City> cities;
 
-    public Database(String filename) throws IOException, JSONException {
+    public Database(String filename) throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
         cities = mapper.readValue(
@@ -37,13 +38,15 @@ public class Database {
         vertex.add(new Vertex(0,0,0,0)); //Add 0->0 cost 0 to avoid crashes
     }
 
-    private void getGoogleDistance() throws IOException, JSONException {
+    private void getGoogleDistance() throws Exception {
         System.out.println("Obteniendo datos de Google");
         InputStream is;
         BufferedReader br;
         String line;
         int i;
+        ObjectMapper mapper = new ObjectMapper();
         for (i=0;i<cities.size();i++) {
+            System.out.println();
             cities.get(i).setId(i);
             City origin = cities.get(i);
 
@@ -54,17 +57,16 @@ public class Database {
             while ((line = br.readLine()) != null) {
                 data.append(line);
             }
-            JSONObject request = new JSONObject(data.toString());
-
-            Google google = new Google(request);
+            Google google = new Google(mapper.readValue(data.toString(), Response.class));
             int id = 0;
-            for (int j=0;j<google.getList().size();j++) {
-                Google.Elements element = google.getList().get(j);
-                //vertex.add(new Vertex(i,j+i+1, element.getDuration().getValue()));
+            for (Elements element: google.getList()) {
+                Element distance = element.getDistance();
+                Element duration = element.getDuration();
+
                 if (id == i) id++;
                 vertex.add(new Vertex(i,id++,
-                        element.getDistance().getValue(),
-                        element.getDuration().getValue()));
+                        distance.getValue(),
+                        duration.getValue()));
             }
         }
         System.out.println("Se termino de obtener datos de Google");
@@ -100,8 +102,6 @@ public class Database {
                 .filter(e -> e.getFrom() == from && e.getTo() == to)
                 .findFirst()
                 .get();
-
-        //System.out.println(vertex1);
 
         return vertex1.getTime();
         //return vertex1.getDistance();

@@ -14,7 +14,7 @@ class Combinations {
     private Database dataBase;
     private Path best;
 
-    Combinations(String url) throws IOException, JSONException {
+    Combinations(String url) throws Exception {
         dataBase = new Database(url);
         best = new Path(Double.POSITIVE_INFINITY);
 
