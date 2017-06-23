@@ -2,9 +2,7 @@ package org.dlt;
 
 import org.dlt.model.Path;
 import org.dlt.service.Database;
-import org.json.JSONException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -42,16 +40,13 @@ class Combinations {
         cost = dataBase.getCost(last, first);
         option.add(first,cost);
 
-        last = option.getLast();
-        cost = dataBase.getCost(last, second);
+        cost = dataBase.getCost(first, second);
         option.add(second,cost);
 
-        last = option.getLast();
-        cost = dataBase.getCost(last, third);
+        cost = dataBase.getCost(second, third);
         option.add(third,cost);
 
-        last = option.getLast();
-        cost = dataBase.getCost(last, 0);
+        cost = dataBase.getCost(third, 0);
         option.add(0,cost);
 
         return option;
@@ -96,14 +91,6 @@ class Combinations {
                 header.get(0));
         list1.add(option6);
 
-        /*System.out.println(option1);
-        System.out.println(option2);
-        System.out.println(option3);
-        System.out.println(option4);
-        System.out.println(option5);
-        System.out.println(option6);
-
-        System.out.println(Collections.min(list1));*/
         return Collections.min(list1);
     }
 
@@ -113,8 +100,7 @@ class Combinations {
 
             Path cheap = getCheaper(list, header);
 
-            if (cheap.getCost()<best.getCost())
-                best = cheap;
+            if (cheap.getCost() < best.getCost()) best = cheap;
 
             return;
         }
@@ -126,8 +112,6 @@ class Combinations {
             Path path = new Path(list);
             double cost = dataBase.getCost(path.getLast(), actual);
             path.add(actual, cost);
-
-            //System.out.println(path);
 
             combination(path, header);
 
