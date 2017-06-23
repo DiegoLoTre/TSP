@@ -1,5 +1,6 @@
 package org.dlt;
 
+import lombok.Getter;
 import org.dlt.model.Path;
 import org.dlt.service.Database;
 
@@ -8,21 +9,16 @@ import java.util.Collections;
 import java.util.List;
 
 class Combinations {
-    private List<Integer> list = new ArrayList<>();
-    private Database dataBase;
+    @Getter private final Database database;
     private Path best;
 
-    Combinations(String url) throws Exception {
-        dataBase = new Database(url);
+    Combinations(Database database) {
+        this.database = database;
         best = new Path(Double.POSITIVE_INFINITY);
-
-        for (int i =1;i<dataBase.getCities().size();i++) {
-            list.add(dataBase.getCities().get(i).getId());
-        }
     }
 
-    Path getBest() {
-        combination(new Path(), list);
+    Path getBest(Path path, List<Integer> list) {
+        combination(path, new ArrayList<>(list));
 
         return best;
     }
@@ -37,16 +33,16 @@ class Combinations {
         Path option = new Path(original);
 
         last = option.getLast();
-        cost = dataBase.getCost(last, first);
+        cost = database.getCost(last, first);
         option.add(first,cost);
 
-        cost = dataBase.getCost(first, second);
+        cost = database.getCost(first, second);
         option.add(second,cost);
 
-        cost = dataBase.getCost(second, third);
+        cost = database.getCost(second, third);
         option.add(third,cost);
 
-        cost = dataBase.getCost(third, 0);
+        cost = database.getCost(third, 0);
         option.add(0,cost);
 
         return option;
@@ -110,26 +106,12 @@ class Combinations {
             header.remove(i);
 
             Path path = new Path(list);
-            double cost = dataBase.getCost(path.getLast(), actual);
+            double cost = database.getCost(path.getLast(), actual);
             path.add(actual, cost);
 
             combination(path, header);
 
             header.add(i,actual);
         }
-    }
-
-    String getRoute(Path path) {
-        StringBuilder string = new StringBuilder("Ruta más optima:");
-        string.append("\n->")
-                .append(dataBase.getName(0));
-        for (int i: path.getRoute()) {
-            string.append("\n->");
-            string.append(dataBase.getName(i));
-        }
-        string.append("\nCon costo de:")
-                .append(path.getCost());
-
-        return string.toString();
     }
 }

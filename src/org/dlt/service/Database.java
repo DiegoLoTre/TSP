@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.dlt.model.City;
 import org.dlt.model.Google;
+import org.dlt.model.Path;
 import org.dlt.model.Vertex;
 import org.dlt.model.google.Element;
 import org.dlt.model.google.Elements;
@@ -35,7 +36,6 @@ public class Database {
         vertex = new ArrayList<>();
 
         getGoogleDistance();
-        vertex.add(new Vertex(0,0,0,0)); //Add 0->0 cost 0 to avoid crashes
     }
 
     private void getGoogleDistance() throws Exception {
@@ -46,7 +46,7 @@ public class Database {
         int i;
         ObjectMapper mapper = new ObjectMapper();
         for (i=0;i<cities.size();i++) {
-            System.out.println();
+            System.out.println("Obteniendo Distancias desde el punto "+i);
             cities.get(i).setId(i);
             City origin = cities.get(i);
 
@@ -59,12 +59,12 @@ public class Database {
             }
             Google google = new Google(mapper.readValue(data.toString(), Response.class));
             int id = 0;
-            for (Elements element: google.getList()) {
+            for (Elements element : google.getList()) {
                 Element distance = element.getDistance();
                 Element duration = element.getDuration();
 
                 if (id == i) id++;
-                vertex.add(new Vertex(i,id++,
+                vertex.add(new Vertex(i, id++,
                         distance.getValue(),
                         duration.getValue()));
             }
@@ -98,20 +98,38 @@ public class Database {
     }
 
     public double getCost(Integer from, Integer to) {
-        Vertex vertex1 = vertex.stream()
-                .filter(e -> e.getFrom() == from && e.getTo() == to)
-                .findFirst()
-                .get();
+        if(vertex.stream()
+                .anyMatch(e -> e.getFrom() == from && e.getTo() == to)) {
+            Vertex vertex1 = vertex.stream()
+                    .filter(e -> e.getFrom() == from && e.getTo() == to)
+                    .findFirst()
+                    .get();
 
-        return vertex1.getTime();
-        //return vertex1.getDistance();
+            return vertex1.getTime();
+            //return vertex1.getDistance();
+        } else
+            return 0;
     }
-    public String getName(int id) {
+    private String getName(int id) {
         City city = cities.stream()
                 .filter(e -> e.getId() == id)
                 .findAny()
                 .get();
 
         return city.getName();
+    }
+
+    public String getRoute(Path path) {
+        StringBuilder string = new StringBuilder("Ruta más optima:");
+        string.append("\n->")
+                .append(getName(0));
+        for (int i: path.getRoute()) {
+            string.append("\n->");
+            string.append(getName(i));
+        }
+        string.append("\nCon costo de: ")
+                .append(path.getCost());
+
+        return string.toString();
     }
 }
