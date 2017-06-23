@@ -21,7 +21,7 @@ public class Vertex {
             ObjectMapper mapper = new ObjectMapper();
             return mapper
                     .writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(this);
+                    .writeValueAsString(this)+"\n";
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return "";

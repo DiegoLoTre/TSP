@@ -8,5 +8,5 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Row {
-    @Getter @Setter public List<Elements> elements;
+    @Getter @Setter private List<Elements> elements;
 }
