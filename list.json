@@ -1,0 +1,72 @@
+[
+  {
+    "nombre": "Casa",
+    "x"     : 19.265826,
+    "y"     : -99.706826
+  },
+  {
+    "nombre": "Acuario Inbursa",
+    "x"     : 19.439944,
+    "y"     : -99.205130
+  },
+  {
+    "nombre": "Cancun",
+    "x"     : 21.060692,
+    "y"     : -86.779216
+  },
+  {
+    "nombre": "Acuario Mazatlan",
+    "x"     : 23.229337,
+    "y"     : -106.427215
+  },
+  {
+    "nombre": "Acuario de Guadalajara",
+    "x"     : 20.651417,
+    "y"     : -103.310689
+  },
+  {
+    "nombre": "Acuario del Zoológico de Morelia",
+    "x"     : 19.682859,
+    "y"     : -101.195127
+  },
+  {
+    "nombre": "Acuario de Veracruz",
+    "x"     : 19.187063,
+    "y"     : -96.122183
+  },
+  {
+    "nombre": "Cabo San Lucas",
+    "x"     : 22.876767,
+    "y"     : -109.910249
+  },
+  {
+    "nombre": "Cenote de Samula, Yucatan",
+    "x"     : 20.661973,
+    "y"     : -88.243957
+  },
+  {
+    "nombre": "Volcán Paricutín",
+    "x"     : 19.493283,
+    "y"     : -102.251488
+  },
+  {
+    "nombre": "Prismas Basalticos",
+    "x"     :20.235229,
+    "y"     :-98.560450
+  },
+  {
+    "nombre": "Grutas de Cacahuamilpa",
+    "x"     : 18.963057,
+    "y"     : -99.213781
+  },
+  {
+    "nombre": "Cascadas de Agua Azul, Chiapas",
+    "x"     :17.258943,
+    "y"     :-92.114295
+  },
+  {
+    "nombre": "Puerto Vallarta",
+    "x"     :20.643318,
+    "y"     :-105.238050
+  }
+]

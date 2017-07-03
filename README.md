@@ -7,7 +7,7 @@ The app use:
 * [Google Maps Distance Matrix API](https://developers.google.com/maps/documentation/distance-matrix/?hl=ES) to get the distances and times
 * [JSON](http://www.json.org/json-es.html) to read the result of the Google maps distance Matrix API
 
-##Requeriments
+##Requirements
 
 **Java 8**
 **Internet Connection**
@@ -18,7 +18,7 @@ The files
 Must have a file with the points of the route example:
 
 [{
-	"nombre": "Galerias Toluca",
+	"nombre": "Galerías Toluca",
 	"x": 19.289925,
 	"y": -99.622425
 }]

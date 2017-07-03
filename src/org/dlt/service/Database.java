@@ -21,18 +21,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
-    /*Put here your API Key of google*/private String APIKEY = "";
+    /*Put here your API Key of google*/private final String APIKEY = "";
 
     @Getter @Setter private List<Vertex> vertex;
     @Getter @Setter private List<City> cities;
 
     public Database(String filename) throws Exception {
-
         ObjectMapper mapper = new ObjectMapper();
         cities = mapper.readValue(
                 new File(filename),
                 new TypeReference<List<City>>() {}
         );
+        if (cities.size() < 3) throw new IllegalArgumentException();
+
         vertex = new ArrayList<>();
 
         getGoogleDistance();
@@ -103,18 +104,19 @@ public class Database {
             Vertex vertex1 = vertex.stream()
                     .filter(e -> e.getFrom() == from && e.getTo() == to)
                     .findFirst()
-                    .get();
+                    .orElse(null);
 
             return vertex1.getTime();
             //return vertex1.getDistance();
         } else
             return 0;
     }
+
     private String getName(int id) {
         City city = cities.stream()
                 .filter(e -> e.getId() == id)
                 .findAny()
-                .get();
+                .orElse(null);
 
         return city.getName();
     }
