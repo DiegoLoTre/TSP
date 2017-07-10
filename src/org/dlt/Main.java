@@ -40,20 +40,13 @@ class Main {
 
                 long start = System.currentTimeMillis();
                 Path path;
-                if (list.size() == 3)
-                    path = new Combinations(database).get2Best(new Path(), list.get(0), list.get(1));
-                else if (list.size() == 4)
-                    path = new Combinations(database).get3Best(new Path(), list.get(0), list.get(1), list.get(2));
-                else if (list.size() == 5)
-                    path = new Combinations(database).get4Best(new Path(), list.get(0), list.get(1), list.get(2), list.get(3));
-                else if (list.size() == 6)
-                    path = new Combinations(database).get5Best(new Path(), list.get(0), list.get(1), list.get(2), list.get(3), list.get(4));
-                else if (list.size() == 7)
-                    path = new Combinations(database).get6Best(new Path(), list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), list.get(5));
-                else if (list.size() == 8)
-                    path = new Combinations(database).get7Best(new Path(), list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), list.get(5), list.get(6));
-                else if (list.size() < 12)
-                    path = new Combinations(database).getBest(new Path(), list);
+                if (list.size() == 2)      path = new Combinations(database).get2Best(new Path(), list.get(0), list.get(1));
+                else if (list.size() == 3) path = new Combinations(database).get3Best(new Path(), list.get(0), list.get(1), list.get(2));
+                else if (list.size() == 4) path = new Combinations(database).get4Best(new Path(), list.get(0), list.get(1), list.get(2), list.get(3));
+                else if (list.size() == 5) path = new Combinations(database).get5Best(new Path(), list.get(0), list.get(1), list.get(2), list.get(3), list.get(4));
+                else if (list.size() == 6) path = new Combinations(database).get6Best(new Path(), list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), list.get(5));
+                else if (list.size() == 7) path = new Combinations(database).get7Best(new Path(), list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), list.get(5), list.get(6));
+                else if (list.size() < 12) path = new Combinations(database).getBest(new Path(), list);
                 else {
                     path = null;
                     try {

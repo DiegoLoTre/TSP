@@ -129,8 +129,23 @@ public class Database {
             string.append("\n->");
             string.append(getName(i));
         }
-        string.append("\nCon costo de: ")
-                .append(path.getCost());
+
+        System.out.println(path.getCost());
+
+        string.append("\nCon costo de: ");
+
+        int hours = (int) path.getCost() / 3600;
+        int remainder = (int) path.getCost() - hours * 3600;
+        int mins = remainder / 60;
+
+        string.append(hours).append(" horas ")
+                .append(mins) .append(" minutos");
+
+        /*int km  = (int) path.getCost() / 1000;
+        int mts = (int) path.getCost() - km * 1000;
+
+        string.append(km).append(" kilometros ")
+                .append(mts) .append(" metros");*/
 
         return string.toString();
     }
